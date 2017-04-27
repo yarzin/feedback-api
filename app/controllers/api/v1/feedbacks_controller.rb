@@ -16,6 +16,10 @@ module Api
 					render json: { errors: @feedback.errors.full_messages }, status: :unprocessable_entity
 				end
 			end
+			
+			def show
+				render json: get_feedback, status: :ok
+			end
 
 			def update
 				@feedback = get_feedback.update(feedback_params)
