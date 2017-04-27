@@ -17,10 +17,6 @@ module Api
 				end
 			end
 
-			def show
-				render json: get_feedback, status: :ok
-			end
-
 			def update
 				@feedback = get_feedback.update(feedback_params)
 				if @feedback
