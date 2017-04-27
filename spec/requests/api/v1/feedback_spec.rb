@@ -23,14 +23,14 @@ RSpec.describe 'Feedback API', type: :request do
   # Test suite for POST /feedbacks
   describe 'POST /feedbacks' do
     # valid payload
-    let(:valid_attributes) { {age: '20', name: "Oleg", date: "2017-04-29", id_last_request: '1' } }
+    let(:valid_attributes) { {age: '20', name: "Oleg Babiy", date: "2017-04-29", id_last_request: '1' } }
 
     context 'when the request is valid' do
       before { post '/api/v1/feedbacks', params: valid_attributes }
 
       it 'creates a feedbacks' do
       	json = JSON.parse(response.body)
-        expect(json['name']).to eq('Oleg')
+        expect(json['name']).to eq('Oleg Babiy')
       end
 
       it 'returns status code CREATED' do
