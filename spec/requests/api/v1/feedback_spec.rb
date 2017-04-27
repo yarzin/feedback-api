@@ -23,7 +23,7 @@ RSpec.describe 'Feedback API', type: :request do
   # Test suite for POST /feedbacks
   describe 'POST /feedbacks' do
     # valid payload
-    let(:valid_attributes) { {age: 2, name: "Oleg Babiy", date: "2017-04-29T21:00:00.000Z" } }
+    let(:valid_attributes) { {age: 2, name: "Oleg Babiy", date: "2017-04-29T21:00:00.000Z", id_last_request: '1' } }
 
     context 'when the request is valid' do
       before { post '/api/v1/feedbacks', params: valid_attributes }
@@ -47,19 +47,12 @@ RSpec.describe 'Feedback API', type: :request do
     end
   end
 
-   # Test suite for PUT /feedbacks
-  describe 'PUT /feedbacks/:id' do
-    # valid payload
-    let(:valid_attributes) { { name: 'Learn Elm' } }
+    # Test suite for Show /boks/:id
+  describe 'GET /feedbacks/:id' do
+    before { get "/api/v1/feedbacks/#{feedback_id}" }
 
-    context 'when the request is valid' do
-      before { put '/api/v1/feedbacks/1', params: valid_attributes }
-
-      it 'returns status code CREATED' do
-        expect(response).to have_http_status(:created)
-      end
+    it 'returns status code 200' do
+      expect(response).to have_http_status(:ok)
     end
   end
-
-
 end

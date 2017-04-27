@@ -16,18 +16,9 @@ module Api
 					render json: { errors: @feedback.errors.full_messages }, status: :unprocessable_entity
 				end
 			end
-			
+
 			def show
 				render json: get_feedback, status: :ok
-			end
-
-			def update
-				@feedback = get_feedback.update(feedback_params)
-				if @feedback
-					render json: @feedback, status: :created
-				else
-					render json: { errors: @feedback.errors.full_messages }, status: :unprocessable_entity
-				end
 			end
 
 			private
@@ -36,7 +27,7 @@ module Api
 			end
 
 			def feedback_params
-				params.permit(:age, :name, :date)
+				params.permit(:age, :name, :date, :id_last_request)
 			end
 		end
 	end

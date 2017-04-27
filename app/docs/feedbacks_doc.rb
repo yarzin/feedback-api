@@ -18,6 +18,15 @@ module FeedbacksDoc
   param_group :main_params
   def index; end
 
+  api :GET, '/feedbacks/:id', 'Show Feedback'
+  description <<-EOS
+    == Show single feedback
+    Is used for show single feedback
+      curl -v localhost:5000/api/v1/feedbacks/1
+    EOS
+  param :id, Integer, desc: 'Id feedback for show. '
+  def show; end
+
   api :POST, '/feedbacks', 'Create Feedback'
   description <<-EOS
     == Create Feedback
@@ -27,13 +36,6 @@ module FeedbacksDoc
   param_group :main_params
   def create; end  
 
-  api :PUT, '/feedbacks/:id', 'Update feedback'
-    description <<-EOS
-      == Update feedback
-    Is used for updating feedback
-      curl -v localhost:5000/api/v1/feedbacks/1 -X PUT -H "Accept: application/json" -H "Content-Type: application/json" -d '{"age": 2, "name": "Ostap Ferneza", "date": "2017-04-29T21:00:00.000Z", "id_last_request": "1"}'
-    EOS
-  param_group :main_params
-  def update; end
+
 
 end
