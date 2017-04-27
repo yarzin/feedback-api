@@ -1,0 +1,65 @@
+require 'rails_helper'
+
+RSpec.describe 'Feedback API', type: :request do
+	let!(:feedbacks) { create_list(:feedback, 10) }
+  let(:feedback_id) { feedbacks.first.id }
+
+    # Test suite for GET /feedbacks
+  describe 'GET /api/v1/feedbacks' do
+
+    before { get '/api/v1/feedbacks' }
+
+    it 'returns feedbacks' do
+    	json = JSON.parse(response.body)
+      expect(json).not_to be_empty
+      expect(json.size).to eq(10)
+    end
+
+    it 'returns status code OK' do
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  # Test suite for POST /feedbacks
+  describe 'POST /feedbacks' do
+    # valid payload
+    let(:valid_attributes) { {age: 2, name: "Oleg Babiy", date: "2017-04-29T21:00:00.000Z" } }
+
+    context 'when the request is valid' do
+      before { post '/api/v1/feedbacks', params: valid_attributes }
+
+      it 'creates a book_content' do
+      	json = JSON.parse(response.body)
+        expect(json['name']).to eq('Oleg Babiy')
+      end
+
+      it 'returns status code CREATED' do
+        expect(response).to have_http_status(:created)
+      end
+    end
+
+    context 'when the request is invalid' do
+      before { post '/api/v1/feedbacks', params: { } }
+
+      it 'returns status code Unprocessable_entity' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
+  end
+
+   # Test suite for PUT /feedbacks
+  describe 'PUT /feedbacks/:id' do
+    # valid payload
+    let(:valid_attributes) { { name: 'Learn Elm' } }
+
+    context 'when the request is valid' do
+      before { put '/api/v1/feedbacks/1', params: valid_attributes }
+
+      it 'returns status code CREATED' do
+        expect(response).to have_http_status(:created)
+      end
+    end
+  end
+
+
+end
