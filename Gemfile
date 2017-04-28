@@ -13,6 +13,7 @@ gem 'rack-cors'
 gem 'faker'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'jquery-rails'
+gem 'aws-sdk'
 
 group :production do
   gem 'rails_12factor'
