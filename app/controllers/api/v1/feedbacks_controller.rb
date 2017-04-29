@@ -13,7 +13,6 @@ module Api
 					s3 = Aws::S3::Resource.new(Aws::S3::Client.new)  
 			    key = File.basename params[:file].path
 			    obj = s3.bucket("feedback-adpi").object(params[:file].original_filename)
-			    obj.upload_file(params[:file].open)
 					@feedback = Feedback.new(
 						age: params[:age],
 						name: params[:name],
@@ -22,10 +21,11 @@ module Api
 						url_file: obj.public_url,
 						name_file: obj.key
 					)
+					obj.upload_file(params[:file].open)
 				else
 					@feedback = Feedback.new(feedback_params)
 				end
-				
+
 				if @feedback.save
 					render json: @feedback, status: :created
 				else
