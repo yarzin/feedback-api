@@ -31,8 +31,7 @@ module FeedbacksDoc
   description <<-EOS
     == Create Feedback
     Is used for creating feedback
-      curl -v localhost:5000/api/v1/feedbacks -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{"age": 19, "name": "Ostap Ferneza", "date": "2017-04-29", "id_last_request": "1"}'
-      curl -i -F file=@example.txt http://localhost:5000/api/v1/feedbacks
+      curl http://localhost:5000/api/v1/feedbacks -v -F age=23 -F name='Oleg Babiy' -F date='2017-04-29' -F id_last_request=1 -F file=@example.txt
     EOS
   param_group :main_params
   def create; end  

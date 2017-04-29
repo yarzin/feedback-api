@@ -9,17 +9,10 @@ module Api
 			end
 
 			def create
-			s3 = Aws::S3::Resource.new(Aws::S3::Client.new)  
-
-		    # Create a key.
+				s3 = Aws::S3::Resource.new(Aws::S3::Client.new)  
 		    key = File.basename params[:file].path
-
-		    # Set the bucket and the key.
-		    obj = s3.bucket("feedback-api").object(params[:file].original_filename)
-
-		    # Upload the file.
+		    obj = s3.bucket("feedback-adpi").object(params[:file].original_filename)
 		    obj.upload_file(params[:file].open)
-				# @feedback = Feedback.create(feedback_params)
 				@feedback = Feedback.new(
 					age: params[:age],
 					name: params[:name],
@@ -42,10 +35,6 @@ module Api
 			private
 			def get_feedback
 				@feedback = Feedback.find(params[:id])
-			end
-
-			def feedback_params
-				params.permit(:age, :name, :date, :id_last_request, :file)
 			end
 		end
 	end
