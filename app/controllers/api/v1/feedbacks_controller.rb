@@ -21,13 +21,16 @@ module Api
 						url_file: obj.public_url,
 						name_file: obj.key
 					)
-					obj.upload_file(params[:file].open)
+
 				else
 					@feedback = Feedback.new(feedback_params)
 				end
 
 				if @feedback.save
 					render json: @feedback, status: :created
+					if params[:file]
+						obj.upload_file(params[:file].open)
+					end
 				else
 					render json: { errors: @feedback.errors.full_messages }, status: :unprocessable_entity
 				end
