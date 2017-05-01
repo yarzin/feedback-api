@@ -10,17 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428101449) do
+ActiveRecord::Schema.define(version: 20170501110641) do
 
   create_table "feedbacks", force: :cascade do |t|
     t.integer  "age"
     t.text     "name"
     t.date     "date"
     t.string   "id_last_request"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "url_file"
-    t.string   "name_file"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
   end
 
 end
