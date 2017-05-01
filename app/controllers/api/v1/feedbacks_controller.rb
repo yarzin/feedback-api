@@ -21,7 +21,6 @@ module Api
 						url_file: obj.public_url,
 						name_file: obj.key
 					)
-
 				else
 					@feedback = Feedback.new(feedback_params)
 				end
