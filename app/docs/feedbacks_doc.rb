@@ -2,10 +2,12 @@ module FeedbacksDoc
 	extend Apipie::DSL::Concern
 
 	def_param_group :main_params do
-    param :age, Integer, desc: 'The field user age. '
-    param :name, String, desc: 'The name user. '
-    param :date, Date , desc: 'Date for .'
-    param :id_last_request, Integer, desc: 'The last request id not required. '
+    param :age, Integer, required: true, desc: 'The field user age. '
+    param :name, String, required: true, desc: 'The name user. '
+    param :date, Date, required: true, desc: 'Date for .'
+    param :id_last_request, Integer, required: false, desc: 'The last request id not required.'
+    param :url_file, String, 'Url file.'
+    param :name_file, String , 'Name file.' 
   end
 
   api :GET, '/feedbacks', 'All feedbacks '
